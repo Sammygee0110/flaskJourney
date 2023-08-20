@@ -1,12 +1,7 @@
+from flask import render_template, url_for, redirect, flash
+from flaskblog import app
 from flaskblog.forms import RegistrationForm, LoginForm
 from flaskblog.models import User, Post
-from flaskblog import app
-from flask import render_template, url_for, redirect, flash
-
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template("home.html", posts=posts, title="Home Page")
 
 
 posts = [
@@ -23,6 +18,11 @@ posts = [
         "content": "Second blog post content"
     }
 ]
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template("home.html", posts=posts, title="Home Page")
 
 
 @app.route("/about")

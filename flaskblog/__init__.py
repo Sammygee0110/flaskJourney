@@ -7,3 +7,5 @@ app.config["SECRET_KEY"] = "05646efc442447eb4b24b6a554d10d17"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 
 db = SQLAlchemy(app)
+
+from flaskblog import routes
