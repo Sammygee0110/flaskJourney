@@ -73,6 +73,8 @@ def save_picture(form_picture):
     picture_path = os.path.join(app.root_path, 'static/profile_pic', picture_fn)
     form_picture.save(picture_path)
 
+    return picture_fn
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
