@@ -91,8 +91,8 @@ def new_post():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
-        db.seesion.add(post)
-        db.seesion.commit()
+        db.session.add(post)
+        db.session.commit()
         flash("Your post has been created succesfully!", "success")
         return redirect(url_for('home'))
     return render_template('new_post.html', title='New Post', form=form)
