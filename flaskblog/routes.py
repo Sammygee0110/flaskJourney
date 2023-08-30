@@ -8,24 +8,10 @@ from flaskblog.models import User, Post
 from flask_login import login_user, logout_user, current_user, login_required
 
 
-posts = [
-    {
-        "author":"Samuel Mosebolatan",
-        "date_posted": "14th of August 2023",
-        "title": "Blog Post 1",
-        "content": "First blog post content"
-    },
-    {
-        "author": "Joshua Mosebolatan",
-        "date_posted": "15th of August 2023",
-        "title": "Blog Post 2",
-        "content": "Second blog post content"
-    }
-]
-
 @app.route("/")
 @app.route("/home")
 def home():
+    posts = Post.query.all()
     return render_template("home.html", posts=posts, title="Home Page")
 
 
@@ -104,6 +90,9 @@ def account():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.seesion.add(post)
+        db.seesion.commit()
         flash("Your post has been created succesfully!", "success")
         return redirect(url_for('home'))
     return render_template('new_post.html', title='New Post', form=form)
